@@ -3,7 +3,7 @@ import pprint
 
 class FillingDoc:
     def __init__(self):
-        self.table_path = f'.\INFOTABLE.tsv'
+        self.table_path = f'.\input\INFOTABLE.tsv'
         self.table_data = pd.read_csv(self.table_path, sep='\t', header=0)
 
     def show_table(self):
@@ -15,7 +15,7 @@ class FillingDoc:
 
 class CUSIPMapTable:
     def __init__(self):
-        self.table_path = f'.\CUSIP.csv'
+        self.table_path = f'.\input\CUSIP.csv'
         self.table_data = pd.read_csv(self.table_path, sep=',')
 
     def show_table(self):
@@ -24,7 +24,7 @@ class CUSIPMapTable:
 
 class DTCCode:
     def __init__(self):
-        self.table_path = f'.\DTCParticipantCode.csv'
+        self.table_path = f'.\input\DTCParticipantCode.csv'
         self.table_data = pd.read_csv(self.table_path, sep='\t', header=0)
 
     def show_table(self):
@@ -32,7 +32,7 @@ class DTCCode:
 
 class FilingCompanyMap:
     def __init__(self):
-        self.table_path = f'.\FilingNumberMap.csv'
+        self.table_path = f'.\input\FilingNumberMap.csv'
         self.table_data = pd.read_csv(self.table_path, header=0)
 
     def show_table(self):
