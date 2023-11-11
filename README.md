@@ -8,4 +8,6 @@ Usage:
 6. find output file in output/query directory
 
 *note: mac user has to change all \ to /
+
+
 ![image](https://github.com/Shao-Fu-Wang/TEMG-4950-JPM-Dashboard/assets/45915603/87f68b7a-8e2b-4577-8484-0afc92587fae)
