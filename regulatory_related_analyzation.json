@@ -1,7 +1,8 @@
 {
     "0": {
         "title": "BlackRock's bitcoin ETF added to DTCC file in Aug - DTCC spokesperson",
-        "sentiment": "Neutral",
-        "summary": "Summary: \n\nBlackRock, the world's largest asset manager, has proposed a Bitcoin exchange-traded fund (ETF) that was added to a clearing-house eligibility file in August. However, this move does not imply any regulatory approval. The ETF is still under review by the regulatory authorities. The addition of the ETF to the eligibility file is a procedural step that allows the Depository Trust & Clearing Corporation (DTCC) to prepare for the potential launch of the product. The news comes amidst increasing interest in cryptocurrency ETFs, with several other firms also filing for similar products. Further updates on the status of BlackRock's Bitcoin ETF will be closely monitored."
+        "sentiment_label": "Neutral",
+        "sentiment_score": 0.9999654293060303,
+        "summary": "Summary:\n\nBlackRock, the world's largest asset manager, has proposed a Bitcoin Exchange-Traded Fund (ETF) which was added to a clearing-house eligibility file in August. However, this move does not necessarily indicate any regulatory approval. The ETF is still under review by the regulatory authorities. The addition to the Depository Trust & Clearing Corporation (DTCC) file simply means that the ETF has met certain operational requirements and is eligible for clearing and settlement through DTCC's systems. The launch of a Bitcoin ETF by BlackRock could potentially signal a significant shift in the acceptance of cryptocurrency by mainstream financial institutions. However, the regulatory landscape for such products remains uncertain."
     }
 }
