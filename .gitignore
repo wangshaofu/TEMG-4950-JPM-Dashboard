@@ -1,0 +1,8 @@
+named .venv
+.venv/
+named __pycache__
+__pycache__/
+named input
+input/
+named output
+output/
