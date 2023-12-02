@@ -4,10 +4,8 @@ Usage:
 2. download everything from the TEAMS data file
 3. configure the project directory to match with the one in my screenshot
 4. cd into directory and cmd python to run the __main__analyzer.py
-5. input year-quarter and mode to run query
+5. input year-quarter and mode to select mode then type in query
 6. find output file in output/query directory
-
-*note: mac user has to change all \ to /
 
 
 ![image](https://github.com/Shao-Fu-Wang/TEMG-4950-JPM-Dashboard/assets/45915603/87f68b7a-8e2b-4577-8484-0afc92587fae)
