@@ -1,2 +1,2 @@
-# TEMG-4950-JPM-Dashboard Qualitative Data Evaluation
+# TEMG-4950-JPM-Dashboard
 Pretty self explainatory.
