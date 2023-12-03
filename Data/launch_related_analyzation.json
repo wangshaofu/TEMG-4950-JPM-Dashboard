@@ -1,0 +1,14 @@
+{
+    "0": {
+        "title": "Bitcoin\u2019s 10% jump to $30,000 hints at trader \u2018playbook\u2019 for ETF launches",
+        "sentiment_label": "Negative",
+        "sentiment_score": 0.9785405397415161,
+        "summary": "Summary:\n\nThe recent 10% surge in Bitcoin, triggered by a false report that BlackRock Inc. had received approval to launch a spot ETF, has highlighted the potential impact of the upcoming decision by the US Securities & Exchange Commission on the approval of exchange-traded funds (ETFs) that invest directly in Bitcoin. The erroneous report quickly drove Bitcoin's price to $30,002, its highest since March, before cooling off after BlackRock clarified that its application is still under review. This incident provides insights into the market's anticipation and potential reaction to the launch of a Bitcoin ETF."
+    },
+    "1": {
+        "title": "Bitcoin jumps 10%, then slides after BlackRock's ETF clarification",
+        "sentiment_label": "Positive",
+        "sentiment_score": 0.9770365357398987,
+        "summary": "Summary:\n\nThe article discusses the recent fluctuations in Bitcoin's price following rumors about BlackRock's potential launch of a spot-Bitcoin ETF in the US. The cryptocurrency's value saw a 10% increase due to speculation that BlackRock had received approval for the ETF. However, these gains were short-lived as BlackRock clarified that their application is still under review by the Securities and Exchange Commission (SEC). The uncertainty surrounding the approval of the ETF led to a subsequent slide in Bitcoin's price. This event underscores the significant impact of ETF launches on cryptocurrency markets."
+    }
+}

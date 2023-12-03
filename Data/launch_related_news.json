@@ -1,0 +1,32 @@
+{
+    "status": "ok",
+    "totalResults": 2,
+    "articles": [
+        {
+            "source": {
+                "id": "the-times-of-india",
+                "name": "The Times of India"
+            },
+            "author": "Bloomberg",
+            "title": "Bitcoin\u2019s 10% jump to $30,000 hints at trader \u2018playbook\u2019 for ETF launches",
+            "description": "An erroneous report that BlackRock Inc. had won approval to launch a spot ETF rapidly sent the largest digital asset to $30,002 on Monday, the highest price since March. The move cooled after the world\u2019s biggest money manager said its application remains unde\u2026",
+            "url": "https://economictimes.indiatimes.com/markets/cryptocurrency/bitcoins-10-jump-to-30000-hints-at-trader-playbook-for-etf-launches/articleshow/104490656.cms",
+            "urlToImage": "https://img.etimg.com/thumb/msid-104490656,width-1200,height-630,imgsize-2381235,overlay-etmarkets/photo.jpg",
+            "publishedAt": "2023-10-17T07:44:55Z",
+            "content": "A brief 10% surge in Bitcoin gave traders a glimpse into the possible impact of a looming US Securities &amp; Exchange Commission decision on whether to allow exchange-traded funds that invest direct\u2026 [+3375 chars]"
+        },
+        {
+            "source": {
+                "id": "the-times-of-india",
+                "name": "The Times of India"
+            },
+            "author": "Bloomberg",
+            "title": "Bitcoin jumps 10%, then slides after BlackRock's ETF clarification",
+            "description": "Bitcoin's price briefly surged after rumors circulated that BlackRock had received approval to launch a spot-Bitcoin ETF in the US. However, the gains were quickly reversed as BlackRock clarified that the application is still under review by the SEC. Despite \u2026",
+            "url": "https://timesofindia.indiatimes.com/business/cryptocurrency/bitcoin/bitcoin-jumps-as-much-as-10-then-slides-after-blackrocks-etf-clarification/articleshow/104474449.cms",
+            "urlToImage": "https://static.toiimg.com/thumb/msid-104474456,width-1070,height-580,imgsize-169144,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
+            "publishedAt": "2023-10-16T14:51:46Z",
+            "content": "10 Most Affordable Cities in India to Buy a House"
+        }
+    ]
+}
