@@ -1,37 +1,111 @@
 import pandas as pd
-from helper_functions import translate_from_q_to_date
+import warnings
+from landscape import landscape, landscape_issuer, landscape_product
+from investor import portfolio, holding_change
+from competitor import aum, top_bear
+# Ignore warnings
+warnings.filterwarnings('ignore')
+# Load various data files
+cleanETFtable = pd.read_csv("./CleanETFTableUpdated.csv")
+fundValue = pd.read_csv("./JPMValue.csv")
+cleanETFtable = cleanETFtable.drop(['Unnamed: 0'],axis=1)
 
+# extract the companies who filed for amended reports 
+filingPeriodList = cleanETFtable['Period of Report'].unique() 
+lastTwoFiling = filingPeriodList[:2]
+cleanETFtable = cleanETFtable[cleanETFtable['Period of Report'].isin(lastTwoFiling)]# comment this if u want all filings 
+CompanyReviewList = set(cleanETFtable[cleanETFtable['Period of Report']==lastTwoFiling[0]]['Company Name']).intersection(set(cleanETFtable[cleanETFtable['Period of Report']==lastTwoFiling[1]]['Company Name']))
+cleanETFtableCompare = cleanETFtable[cleanETFtable['Company Name'].isin(list(CompanyReviewList))]
 
-def filter_function(mode, query, report_quarter):
-    full_filing_info_table = pd.read_csv(f'.\output\{report_quarter}\FullETFTable.csv')
-    specific_table = None
-    if mode == 'ETF':
-        # find the specific ETF
-        specific_table = full_filing_info_table[full_filing_info_table['ETF Security Description'] == query]
-    elif mode == 'Issuer':
-        # find the specific issuer
-        specific_table = full_filing_info_table[full_filing_info_table['Issuer'] == query]
-    # find the largest holder
-    sum_by_company = specific_table.groupby('Company Name')['VALUE'].sum().reset_index().sort_values('VALUE',
-                                                                                                     ascending=False)
-    total_value = sum_by_company['VALUE'].sum()
-    total_value_row = pd.DataFrame({'Company Name': ['Total Value'], 'VALUE': [total_value]})
-    output_data = pd.concat([total_value_row, sum_by_company])
-    output_data.to_csv(f'.\output\query_output\{query}_{report_quarter}.csv')
+#transform the dataset for client / competitor analysis
+multiClient = cleanETFtableCompare.set_index(['Company Name',
+                                              'Period of Report',
+                                              'Issuer'
 
+],drop=False)
+multiClient2 = cleanETFtableCompare.set_index([
+                                              'Period of Report',
+                                              'Company Name',
+                                              'Issuer',
 
-if __name__ == '__main__':
-    report_quarter = input('Enter period of report(in format of 2023-Q1): ')
-    get_date_from_period = translate_from_q_to_date(report_quarter)
-    search_mode = input('Enter search mode(1 for specific ETF, 2 for specific issuer): ')
-    print('The query `full list available in TickerMeta.csv')
-    if search_mode == '1':
-        mode = 'ETF'
-        query = input('Enter the specific ETF Security Description: ')
-    elif search_mode == '2':
-        mode = 'Issuer'
-        query = input('Enter the specific Issuer to find(full list available in TickerMeta.csv): ')
-    else:
-        print('Bad search mode')
-        exit(0)
-    filter_function(mode=mode, query=query, report_quarter=report_quarter)
+],drop=False)
+
+#product level query
+multiCompetitor = cleanETFtableCompare.set_index([
+                                              'Period of Report',
+                                              'ETF Security Description',
+                                              ],drop=False)
+#competitor-client query
+multiCompetitor2 = cleanETFtableCompare.set_index([
+                                              'Period of Report',
+                                              'Issuer'
+                                              ],drop=True)
+multiCompetitor3  = cleanETFtableCompare.set_index([
+                                              'Issuer',
+                                              'Period of Report',
+                                              'ETF Security Description',
+                                              'Company Name',
+                                              ],drop=False)
+
+if __name__ == "__main__":
+    while(True):
+        option = input("Enter Commands for analysis. L for ETF Landscape, I for Investor Tracker and C for Competitor Tracker.: ")
+        cat = input("Input the market category (Asset Class, Strategy...) ,empty for default view: ")
+        if(cat):
+            subCat = input("Input the market subcategory, empty for default view: ")
+        else:
+            subCat = ''
+        n = input("Number of companies / ETF Products to evaluate and show (default 5): ")
+        if(n):
+            n=int(n)
+        else:
+            n=5
+        by = input("Ranking Method {flow,aum}, default flow: ")
+        if(not by):
+           by='flow'
+        inOrOut = input("Track Top Inflow or Outflow,default inflow: (I/O)")
+        if(not inOrOut):
+            inOrOut='I'
+        if(option=='L'):
+
+            if(subCat):
+                print(f"Top Investors of {subCat}")
+            else:
+                print("Top Investors")
+            print(landscape(multiClient2.loc[lastTwoFiling[1]],multiClient2.loc[lastTwoFiling[0]],cat=cat,subCat=subCat,by=by,n=n,inOrOut=inOrOut))
+            print("")
+            print("Top Competitors")
+            print(landscape_issuer(multiCompetitor2.loc[lastTwoFiling[1]],multiCompetitor2.loc[lastTwoFiling[0]],cat=cat,subCat=subCat,by=by,n=n,inOrOut=inOrOut))
+            print("")            
+            print("Top Products")
+            print(landscape_product(multiCompetitor.loc[lastTwoFiling[1]],multiCompetitor.loc[lastTwoFiling[0]],cat=cat,subCat=subCat,by=by,n=n,inOrOut=inOrOut))
+        elif (option=='I'):
+            investor = input("Investor to be tracked (L for the list of all investors available): ")
+            if (investor == "L"):
+                print(CompanyReviewList)
+                investor = input("Investor to be tracked: ")
+
+            investorPort = multiClient.loc[investor]
+            portVal = portfolio(investorPort.loc[lastTwoFiling[1]],investorPort.loc[lastTwoFiling[0]],cat=cat,subCat=subCat)
+            print(f"Investor {investor}")
+            print(f"Previous Holding: {portVal[0]}")
+            print(f"New Holding: {portVal[1]}")
+            print(f"Net Inflow(Outflow) to Holding: {portVal[2]}")
+            print("")
+            print("Top Products:")
+            print(holding_change(investorPort.loc[lastTwoFiling[1]],investorPort.loc[lastTwoFiling[0]],by=by,n=n,inOrOut=inOrOut))
+
+        elif (option=='C'):
+            issuer = input("Issuer to be tracked (L for the list of all Issuers available): ")
+            if (issuer == "L"):
+                print(cleanETFtableCompare['Issuer'].unique())
+                issuer = input("Issuer to be tracked: ")
+            issuerProd = multiCompetitor3.loc[issuer]
+            prodVal = aum(issuerProd.loc[lastTwoFiling[1]],issuerProd.loc[lastTwoFiling[0]],cat=cat,subCat=subCat)
+            print(f"Investor {issuer}")
+            print(f"Previous AUM: {prodVal[0]}")
+            print(f"New AUM: {prodVal[1]}")
+            print(f"Net Inflow(Outflow) to Products: {prodVal[2]}")
+            print("")
+            print("Top Investor-Product:")
+            print(top_bear(issuerProd.loc[lastTwoFiling[1]],issuerProd.loc[lastTwoFiling[0]],n=n,inOrOut=inOrOut))
